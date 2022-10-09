@@ -218,6 +218,7 @@ app.use(bodyparser.json());
 
 // app.use(express.static(path.join(`${__dirname}`, '/public')));
 app.use(express.static('public'));
+app.use(express.static("../client/app/dist/app/"));
 
 // app.use('/images', express.static('public'));
 
@@ -330,6 +331,11 @@ const db = mysql.createConnection({
 db.connect(err => {
     if (err) console.log('err', err);
 });
+app.get('/', (req,res) => {
+  res.sendFile("../client/app/dist/app/index.html")
+});
+
+
 app.get('/images', (req, res) => {
     let q = `select * from images`;
     db.query(q, (err, result) => {
