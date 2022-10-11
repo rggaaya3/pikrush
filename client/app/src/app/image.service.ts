@@ -9,7 +9,7 @@ export class ImagesService {
 
   constructor(private http:HttpClient) { }
 
-  apiUrl = 'http://localhost:3000/images';
+  apiUrl = 'http://3.87.8.163:3000/images';
 
   // getAllImages():Observable<any> {
   //   return this.http.get(`${this.apiUrl}`);
