@@ -5,8 +5,7 @@ const mysql = require('mysql2');
 const multer = require('multer');
 const fs = require("fs-extra");
 const sharp = require('sharp');
-const path = require('path');
-const dotenv = require('dotenv');
+const path = require('path')
 
 const  MulterSharpResizer = class {
     /**
@@ -239,11 +238,12 @@ const upload = multer({
 });
 
 const insertImageContent = (req) => {
-    const name = req.body.name;
+    const tags = req.body.tags;
     const category = req.body.category;
     var filename = req.body.filename[0].originalname;
-    var path = req.body.filename[0].thumb.path;
-    let q = `insert into images (name, category,path) values('${name}', '${category}','${path}')`;
+    var path = req.body.filename[0].medium.path;
+    var subCategory = req.body.subCategory;
+    let q = `insert into images (tags, category,path, name, sub_category) values('${tags}', '${category}','${path}', '${filename}','${subCategory}')`;
     db.query(q);
 };
 
@@ -255,7 +255,7 @@ const resizerImages = async (req, res, next) => {
 
 
     const filename = {
-        filename: `gallery-${Date.now()}`
+        filename: `${req.body.name}-${Date.now()}`
     }
     const sizes = [{
         path: 'original',
@@ -265,17 +265,14 @@ const resizerImages = async (req, res, next) => {
 
     {
         path: 'large',
-        with: 1000,
-        height: 600
+        width: 1000
     },
     {
         path: 'medium',
-        with: 300,
-        height: 160
+        width: 600
     }, {
         path: 'thumb',
-        with: 150,
-        height: 150
+        width: 200
     }
     ];
     
@@ -320,10 +317,11 @@ const uploadProductImages = upload.fields([
 app.post("/products", uploadProductImages, resizerImages, createProduct);
 
 const db = mysql.createConnection({
-    host:'database-1.c4faqpjzo0qu.us-east-1.rds.amazonaws.com',
-    user:'admin',
-    password: 'Gaya5544',
-    database:'pikrush'
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    port: 3306,
+    database: 'pikrush'
 
 });
 
@@ -331,13 +329,8 @@ const db = mysql.createConnection({
 db.connect(err => {
     if (err) console.log('err', err);
 });
-app.get('/', (req,res) => {
-  res.sendFile("../client/app/dist/app/index.html")
-});
-
-
 app.get('/images', (req, res) => {
-    let q = `select * from images`;
+    let q = `select * from images order by rand()`;
     db.query(q, (err, result) => {
         if (err) console.log(err);
         if (result.length > 0) {
@@ -369,7 +362,8 @@ app.post('/image', (req, res) => {
     const name = req.body.name;
     const category = req.body.category;
     const tags = req.body.tags;
-    let q = `insert into images (name, category, tags) values('${name}', '${category}', '${tags}')`;
+    console.log(tags,"tags");
+    let q = `insert into images ( category, tags) values('${category}', '${tags}')`;
     db.query(q, (err, result) => {
         console.log(result);
         if (err) console.log(err);

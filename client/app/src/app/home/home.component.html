@@ -1,6 +1,52 @@
-
 <div>
-    <div *ngFor="let image of images">
-        <a href="#"><img src={{image.path}}></a>
+        <div class="card" >
+              <!-- <img class="img-fluid" src="img/1847p.png" alt="Card image cap"> -->
+              <div class="search-box">
+                  <div class="form-group">
+                      <div class="icon-addon addon-lg">
+                        <input placeholder="Search..." type="text" id="myInput">
+                        
+                  
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+<div class="fluid-container" style="padding-left:50px; padding-right:50px;padding-top:10px">
+    
+    <div class="flex-container"> 
+        <div class="">
+            <span *ngFor="let image of images; let i = index;" >
+            <img  *ngIf="i<=15" style="width: 400px; height:auto;" src="{{image.path}}"
+                    srcset="{{image.urls}}">
+            </span>
+        </div>
+        <div class="">
+            <span *ngFor="let image of images; let i = index;" >
+            <img  *ngIf="i>=16 && i<=31" style="width: 400px; height:auto;" src="{{image.path}}"
+                    srcset="{{image.urls}}">
+            </span>
+        </div>
+        <div class="">
+            <span *ngFor="let image of images; let i = index;" >
+            <img  *ngIf="i>=31 && i<=46" style="width: 400px; height:auto;" src="{{image.path}}"
+                    srcset="{{image.urls}}">
+            </span>
+        </div>
+        <!-- 
+        <img lazy="load" src="image.filename[0].medium.path" 
+srcset="https://images.pexels.com/photos/13691334/pexels-photo-13691334.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=150&amp;lazy=load 150w, 
+https://images.pexels.com/photos/13691334/pexels-photo-13691334.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300&amp;lazy=load 300w, 
+https://images.pexels.com/photos/13691334/pexels-photo-13691334.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400&amp;lazy=load 400w,
+ https://images.pexels.com/photos/13691334/pexels-photo-13691334.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&amp;lazy=load 600w, 
+ https://images.pexels.com/photos/13691334/pexels-photo-13691334.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800&amp;lazy=load 800w, 
+ https://images.pexels.com/photos/13691334/pexels-photo-13691334.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200&amp;lazy=load 1200w, 
+ https://images.pexels.com/photos/13691334/pexels-photo-13691334.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600&amp;lazy=load 1600w" 
+ sizes="(max-width: 650px) calc((100vw - 30px - 15px) / 2), 
+ (max-width: 900px) calc((100vw - 30px - 15px) / 2), 
+ (max-width: 1440px) calc((100vw - 60px - 60px) / 3), 
+ (max-width: 1600px) calc((100vw - 160px - 60px) / 3), 
+ calc((1600pxpx - 160px - 60px) / 3)"
+ alt="Free Yellow and Brown Concrete House Near Rocky Mountain Stock Photo" class="spacing_noMargin__Q_PsJ MediaCard_image__ljFAl"> -->
     </div>
 </div>

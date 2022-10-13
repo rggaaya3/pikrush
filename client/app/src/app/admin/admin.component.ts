@@ -12,8 +12,9 @@ export class AdminComponent implements OnInit {
   constructor(private http:HttpClient) { }
 
   uploadForm = new FormGroup({
-    name: new FormControl(),
+    tags: new FormControl(),
     category: new FormControl(),
+    subCategory: new FormControl(),
     fileSource: new FormControl()
   });
   preview: string = '';
@@ -34,11 +35,12 @@ export class AdminComponent implements OnInit {
   save() {
     const formData = new FormData();
     formData.append('filename', this.uploadForm.get('fileSource')?.value);
-    formData.append('name', this.uploadForm.get('name')?.value);
+    formData.append('subCategory', this.uploadForm.get('subCategory')?.value);
+    formData.append('tags', this.uploadForm.get('tags')?.value);
     formData.append('category', this.uploadForm.get('category')?.value);
     this.preview = JSON.stringify(this.uploadForm.value);
 
-    this.http.post('http://3.87.8.163:3000/products', formData)
+    this.http.post('http://localhost:3000/products', formData)
       .subscribe(res => {
         console.log(res,'gaya');
         alert('Uploaded Successfully.');
