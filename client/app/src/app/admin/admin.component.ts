@@ -40,7 +40,7 @@ export class AdminComponent implements OnInit {
     formData.append('category', this.uploadForm.get('category')?.value);
     this.preview = JSON.stringify(this.uploadForm.value);
 
-    this.http.post('http://localhost:3000/products', formData)
+    this.http.post('http://3.87.8.163:3000/products', formData)
       .subscribe(res => {
         console.log(res,'gaya');
         alert('Uploaded Successfully.');

@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:3000/images').subscribe((res: any) => {
+    this.http.get('http://3.87.8.163:3000/images').subscribe((res: any) => {
       console.log(res, "gaya");
       this.images = res.data;
       this.deriveImagePaths(this.images);
