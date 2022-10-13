@@ -317,11 +317,15 @@ const uploadProductImages = upload.fields([
 app.post("/products", uploadProductImages, resizerImages, createProduct);
 
 const db = mysql.createConnection({
-    host: '3.87.8.163',
-    user: 'admin',
+    // host: '3.87.8.163',
+    // user: 'admin',
+    // password: 'Gaya5544',
+    // port: 3306,
+    // database: 'pikrush'
+    host:'database-1.c4faqpjzo0qu.us-east-1.rds.amazonaws.com',
+    user:'admin',
     password: 'Gaya5544',
-    port: 3306,
-    database: 'pikrush'
+    database:'pikrush'
 
 });
 
